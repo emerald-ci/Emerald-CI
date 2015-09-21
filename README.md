@@ -14,8 +14,10 @@ Since Emerald CI wants to pursue a Docker Compose driven development, deploying
 it is a matter of a `docker-compose.yml`. You can use your favorite
 orchestration tools which support the compose specification.
 
-> Hint: We like to use [Rancher](http://rancher.com/) and
-> [rancher-compose](https://github.com/rancher/rancher-compose).
+> We like to use [Rancher](http://rancher.com/) and
+> [rancher-compose](https://github.com/rancher/rancher-compose). Using
+> rancher-compose it is just a matter of `rancher-compose up` to setup the
+> whole system.
 
 An example
 [`docker-compose.yml`](https://github.com/emerald-ci/Emerald-CI/blob/master/docker-compose.yml)
