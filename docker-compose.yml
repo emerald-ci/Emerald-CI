@@ -10,7 +10,7 @@ rabbitmq:
 fluentd:
   image: emeraldci/fluentd
   ports:
-    - 24224
+    - 24224:24224
   links:
     - rabbitmq:rabbitmq
 db:

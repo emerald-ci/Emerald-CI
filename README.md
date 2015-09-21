@@ -24,7 +24,8 @@ An example
 has been placed in this repo to deploy the system. Take it, deploy, test and
 have fun! :smile:
 
-> Please make sure to change secrets!
+> Please make sure to change environment variables to match your setup and
+> change secrets!
 
 What's to come
 --------------
