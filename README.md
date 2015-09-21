@@ -61,6 +61,14 @@ have fun! :smile:
 > Please make sure to change environment variables to match your setup and
 > change secrets!
 
+Use Emerald CI in your own project
+----------------------------------
+
+All you need to use Emerald CI is a `.emerald.yml` file in your repos root
+directory (see [documentation on the `.emerald.yml`
+file](https://github.com/emerald-ci/test-runner#yaml-documentation)) and
+`docker-compose.yml`.
+
 What's to come
 --------------
 
