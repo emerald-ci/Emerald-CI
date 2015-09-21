@@ -1,6 +1,8 @@
 Emerald CI
 ==========
 
+[DEMO VIDEO](https://vimeo.com/139941714)
+
 Emerald CI want to pursue a Docker Compose driven development. You test your
 software on the CI server just like you test locally, it drastically reduces
 the risk of breaking the build due to differences of the environments. It uses
