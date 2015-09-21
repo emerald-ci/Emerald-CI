@@ -20,7 +20,16 @@ orchestration tools which support the compose specification.
 An example
 [`docker-compose.yml`](https://github.com/emerald-ci/Emerald-CI/blob/master/docker-compose.yml)
 has been placed in this repo to deploy the system. Take it, deploy, test and
-have fun! :)
+have fun! :smile:
+
+> Please make sure to change secrets!
+
+What's to come
+--------------
+
+Right now Emerald CI only tests your software. To complete the Continuous
+Development cycle, deployment has to be added. The plan is to allow writing
+plugins as docker images which get the build context passed.
 
 Issues
 ------
