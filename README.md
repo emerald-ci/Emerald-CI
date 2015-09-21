@@ -7,6 +7,37 @@ the risk of breaking the build due to differences of the environments. It uses
 the same `docker-compose.yml` specification as Docker Compose, therefore all
 you need is a `docker-compose.yml` and a minimal config in your repo.
 
+How it works
+------------
+
+![How It Works](/how_it_works.png?raw=true "Emerald CI - How It Works")
+
+Emerald CI is composed of multiple microservices:
+
+* An [HAProxy](https://github.com/emerald-ci/haproxy) is required to combine
+  the API and Webapp to allow resource and session sharing.
+* The [Webapp](https://github.com/emerald-ci/webapp) is an
+  [AngularJS](https://angularjs.org/) app that listens to events sent via
+WebSocket and displays those. It's initial data is requested through the API.
+* The [API](https://github.com/emerald-ci/api) is the heart of the System it
+  enqueues workers to run build jobs and streams the logs of a job to the
+Webapp.
+* A worker (built using [Sidekiq](http://sidekiq.org/))starts the job, records
+  the log and updates the status of a job throughout the build cycle.
+* The Docker host is used to run a job on using the
+  [emerald-ci/environment](https://github.com/emerald-ci/environment) Docker
+image. It configures the job container to send its logs to a fluentd server.
+* Within a container the job is executed using Emerald CI's
+  [test-runner](https://github.com/emerald-ci/test-runner), which has been
+developed using the [libcompose](https://github.com/docker/libcompose) library.
+* [Fluentd](http://www.fluentd.org/) collects the logs produced by a job and
+  forwards it to a RabbitMQ server.
+* [RabbitMQ](https://www.rabbitmq.com/) then sends the logs to each subscriber,
+  which can either be the API which forwards the stream to a WebSocket or the
+Worker which persists the log for later access.
+
+These are the high level steps a job goes through in the Emerald CI system.
+
 Setup your own
 --------------
 
