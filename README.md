@@ -50,7 +50,8 @@ orchestration tools which support the compose specification.
 > We like to use [Rancher](http://rancher.com/) and
 > [rancher-compose](https://github.com/rancher/rancher-compose). Using
 > rancher-compose it is just a matter of `rancher-compose up` to setup the
-> whole system.
+> whole system, but for single server setups the normal [Docker
+> Compose](https://github.com/docker/compose) totally suffices.
 
 An example
 [`docker-compose.yml`](https://github.com/emerald-ci/Emerald-CI/blob/master/docker-compose.yml)
