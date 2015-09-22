@@ -7,12 +7,14 @@ rabbitmq:
     - RABBITMQ_DEFAULT_USER=emeraldci
     - RABBITMQ_DEFAULT_PASS=secure
     - RABBITMQ_DEFAULT_VHOST=emeraldci
+  restart: always
 fluentd:
   image: emeraldci/fluentd
   ports:
     - 24224:24224
   links:
     - rabbitmq:rabbitmq
+  restart: always
 db:
   image: postgres:9.4
   ports:
@@ -20,10 +22,12 @@ db:
   environment:
     - POSTGRES_USER=emeraldci
     - POSTGRES_PASSWORD=secure
+  restart: always
 redis:
   image: redis
   ports:
     - 6379
+  restart: always
 docker:
   image: emeraldci/docker-socat
   ports:
@@ -33,6 +37,7 @@ docker:
   stdin_open: true
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
+  restart: always
 api:
   image: emeraldci/api
   command: api
@@ -51,6 +56,7 @@ api:
     - DATABASE_URL=postgres://emeraldci:secure@db/emeraldci
     - REDIS_URL=redis://redis
     - FRONTEND_URL=http://localhost:8080/
+  restart: always
 worker:
   image: emeraldci/api
   command: worker
@@ -67,11 +73,13 @@ worker:
     - REDIS_URL=redis://redis
     - DOCKER_URL=tcp://docker:2375
     - FLUENTD_URL=localhost:24224 # this is tricky because it's the actual hosts docker daemon
+  restart: always
 web:
   image: emeraldci/webapp
   command: grunt serve
   ports:
     - 9000
+  restart: always
 haproxy:
   image: emeraldci/haproxy
   ports:
@@ -79,4 +87,5 @@ haproxy:
   links:
     - api:api
     - web:web
+  restart: always
 
