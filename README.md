@@ -26,16 +26,17 @@ WebSocket and displays those. It's initial data is requested through the API.
 Webapp.
 * A worker (built using [Sidekiq](http://sidekiq.org/)) starts the job, records
   the log and updates the status of a job throughout the build cycle.
-* The Docker host is used to run a job on using the
-  [emerald-ci/environment](https://github.com/emerald-ci/environment) Docker
-image. It configures the job container to send its logs to a fluentd server.
+* The Docker host is used to run a job on using multiple Docker Containers. In
+  general the containers checkout the git repo, run the tests and then run
+configured plugins.  All containers are configured to send their logs to a
+fluentd server.
 * Within a container the job is executed using Emerald CI's
   [test-runner](https://github.com/emerald-ci/test-runner), which has been
 developed using the [libcompose](https://github.com/docker/libcompose) library.
 See [here](https://github.com/emerald-ci/test-runner#yaml-documentation) to
 find out how to configure your project to use Emerald CI.
-* [Fluentd](http://www.fluentd.org/) collects the logs produced by a job and
-  forwards it to a RabbitMQ server.
+* [Fluentd](http://www.fluentd.org/) collects the logs produced by all job
+  containers and forwards it to a RabbitMQ server.
 * [RabbitMQ](https://www.rabbitmq.com/) then sends the logs to each subscriber,
   which can either be the API which forwards the stream to a WebSocket or the
 Worker which persists the log for later access.
