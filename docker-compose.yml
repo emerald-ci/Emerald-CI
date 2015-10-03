@@ -78,7 +78,7 @@ web:
   image: emeraldci/webapp
   command: grunt serve
   ports:
-    - 9000
+    - 80
   restart: always
 haproxy:
   image: emeraldci/haproxy
