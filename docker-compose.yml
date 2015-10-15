@@ -76,7 +76,7 @@ worker:
   restart: always
 web:
   image: emeraldci/webapp
-  command: grunt serve
+  command: grunt serve --port 80
   ports:
     - 80
   restart: always
