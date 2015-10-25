@@ -8,13 +8,6 @@ rabbitmq:
     - RABBITMQ_DEFAULT_PASS=secure
     - RABBITMQ_DEFAULT_VHOST=emeraldci
   restart: always
-fluentd:
-  image: emeraldci/fluentd
-  ports:
-    - 24224:24224
-  links:
-    - rabbitmq:rabbitmq
-  restart: always
 db:
   image: postgres:9.4
   ports:
@@ -72,7 +65,6 @@ worker:
     - RABBITMQ_URL=amqp://emeraldci:secure@rabbitmq/emeraldci
     - REDIS_URL=redis://redis
     - DOCKER_URL=tcp://docker:2375
-    - FLUENTD_URL=localhost:24224 # this is tricky because it's the actual hosts docker daemon
   restart: always
 web:
   image: emeraldci/webapp
