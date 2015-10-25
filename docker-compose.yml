@@ -57,7 +57,6 @@ worker:
     - db:db
     - redis:redis
     - docker:docker
-    - fluentd:fluentd
     - rabbitmq:rabbitmq
   environment:
     - RACK_ENV=development
